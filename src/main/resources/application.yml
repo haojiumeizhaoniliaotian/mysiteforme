@@ -85,5 +85,15 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     cache-enabled: false
 
+aiqiy:
+  partner: TESTXXX     #合作方编码
+  product:
+    test: YLSXYX07test  #陕西有线_直充测试天卡
+  publicKey: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCqRmUWRDAScCI0ba1554+FiMY6OI1xgNvgaVEuIKYgM9niYaODVbvLIj8hx/By4nj91VcIg5b5lTj3no+yDewiecoBp3rohAgpfGDYwLmzuB8lL74XMr3GJPA8MDxdNncvtcXeYpohwIDAQAB
+
+weidian:
+  appKey: 999999999
+  secret: c999999999999d
+  messageType: "weidian.order.already_payment"
 
 
