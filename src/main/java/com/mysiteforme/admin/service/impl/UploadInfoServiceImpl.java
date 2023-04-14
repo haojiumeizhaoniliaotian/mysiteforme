@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 2018-07-06
  */
 @Service
-@Transactional(rollbackFor = Exception.class)
 public class UploadInfoServiceImpl extends ServiceImpl<UploadInfoDao, UploadInfo> implements UploadInfoService {
 
     @Cacheable(value = "uploadInfoCache",key = "'getinfo'",unless = "#result == null")
@@ -32,6 +31,7 @@ public class UploadInfoServiceImpl extends ServiceImpl<UploadInfoDao, UploadInfo
 
     @CacheEvict(value = "uploadInfoCache",key = "'getinfo'")
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void updateInfo(UploadInfo uploadInfo) {
         updateById(uploadInfo);
     }

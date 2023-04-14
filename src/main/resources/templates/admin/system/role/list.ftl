@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>用户总数--layui后台管理模板</title>
+    <title>角色列表</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -10,6 +10,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
     <link rel="stylesheet" href="${base}/static/layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="${base}/static/layui-treetable/css/layui.css">
     <link rel="stylesheet" href="${base}/static/css/user.css" media="all" />
 </head>
 <body class="childrenBody">
@@ -106,12 +107,12 @@
             width: $(parent.window).width()-223,
             cols: [[
                 {type:'checkbox'},
-                {field:'id',          title: 'ID',      width:'3%'},
+                // {field:'id',          title: 'ID',      width:'3%'},
                 {field:'name',        title: '角色名称'   },
-                {field:'createUser',  title: '创建人',templet:'<div>{{  d.createUser.nickName }}</div>'},
-                {field:'updateUser',  title: '修改人',templet:'<div>{{  d.updateUser.nickName }}</div>'},
-                {field:'createDate',  title: '创建时间',    width:'14%',templet:'<div>{{ layui.laytpl.toDateString(d.createDate) }}</div>',unresize: true}, //单元格内容水平居中
-                {field:'updateDate',  title: '修改时间',    width:'14%',templet:'<div>{{ layui.laytpl.toDateString(d.updateDate) }}</div>',unresize: true}, //单元格内容水平居中
+                {field:'createUser',width:'13%',  title: '创建人',templet:'<div>{{  d.createUser.nickName }}</div>'},
+                {field:'updateUser',width:'13%',  title: '修改人',templet:'<div>{{  d.updateUser.nickName }}</div>'},
+                {field:'createDate',  title: '创建时间',    width:'15%',templet:'<div>{{ layui.laytpl.toDateString(d.createDate) }}</div>',unresize: true}, //单元格内容水平居中
+                {field:'updateDate',  title: '修改时间',    width:'15%',templet:'<div>{{ layui.laytpl.toDateString(d.updateDate) }}</div>',unresize: true}, //单元格内容水平居中
                 {title: '操作',fixed: 'right',  width:'15%',    align: 'center',toolbar: '#barDemo'}
             ]]
         };

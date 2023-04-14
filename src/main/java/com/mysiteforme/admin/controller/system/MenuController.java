@@ -6,7 +6,7 @@ import com.google.common.collect.Maps;
 import com.mysiteforme.admin.annotation.SysLog;
 import com.mysiteforme.admin.base.BaseController;
 import com.mysiteforme.admin.entity.Menu;
-import com.mysiteforme.admin.entity.VO.ZtreeVO;
+import com.mysiteforme.admin.entity.vo.ZtreeVO;
 import com.mysiteforme.admin.util.RestResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;

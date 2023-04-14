@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>layui</title>
+    <title>新增角色</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -52,7 +52,7 @@
     </div>
     <div class="layui-form-item layui-form-text">
         <div class="layui-input-block" style="width: 80%">
-            <textarea placeholder="一些可有可无的备注罢了.." name="remarks" class="layui-textarea"></textarea>
+            <textarea placeholder="角色介绍信息.." name="remarks" class="layui-textarea"></textarea>
         </div>
     </div>
     <div class="layui-form-item">
@@ -143,7 +143,7 @@
                 success:function(res){
                     layer.close(loadIndex);
                     if(res.success){
-                        parent.layer.msg("用户添加成功！",{time:1000},function(){
+                        parent.layer.msg("角色添加成功！",{time:1000},function(){
                             //刷新父页面
                             parent.location.reload();
                         });

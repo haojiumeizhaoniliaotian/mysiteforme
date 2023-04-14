@@ -1,8 +1,8 @@
 package com.mysiteforme.admin.dao;
 
 import com.baomidou.mybatisplus.plugins.Page;
-import com.mysiteforme.admin.entity.VO.TableField;
-import com.mysiteforme.admin.entity.VO.TableVO;
+import com.mysiteforme.admin.entity.vo.TableField;
+import com.mysiteforme.admin.entity.vo.TableVO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

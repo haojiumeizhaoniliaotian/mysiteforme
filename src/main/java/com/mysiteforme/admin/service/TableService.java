@@ -1,8 +1,8 @@
 package com.mysiteforme.admin.service;
 
 import com.baomidou.mybatisplus.plugins.Page;
-import com.mysiteforme.admin.entity.VO.TableField;
-import com.mysiteforme.admin.entity.VO.TableVO;
+import com.mysiteforme.admin.entity.vo.TableField;
+import com.mysiteforme.admin.entity.vo.TableVO;
 
 import java.util.List;
 import java.util.Map;

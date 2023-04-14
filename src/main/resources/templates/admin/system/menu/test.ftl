@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <link href="" rel="stylesheet">
-    <link rel="stylesheet" href="https://static.mysiteforme.com/layui-treetable/layui/css/layui.css">
+    <link rel="stylesheet" href="${base}/static/layui-treetable/css/layui.css">
     <style>
         .layui-table .value_col{
             text-align: center;
@@ -29,7 +29,7 @@
     <div id="demo"></div>
 </div>
 </body>
-<script src="https://static.mysiteforme.com/layui-treetable/layui/layui.js"></script>
+<script src="${base}/static/layui-treetable/layui.js"></script>
 <script type="text/javascript" src="${base}/static/js/jquery.min.js"></script>
 
 <script type="text/javascript">
@@ -43,16 +43,25 @@
                 name: '链接地址',
                 headerClass: 'value_col',
                 colClass: 'value_col',
-                style: 'width: 15%',
+                style: 'width: 180px',
                 render:function(row){
                     return undefined === row.href?"" : row.href;
+                }
+            },
+            {
+                name: '权限代码',
+                headerClass: 'value_col',
+                colClass: 'value_col',
+                style: 'width: 150px',
+                render:function(row){
+                    return undefined === row.permission?"" : row.permission;
                 }
             },
             {
                 name: '图标',
                 headerClass: 'value_col',
                 colClass: 'value_col',
-                style: 'width: 5%;text-align: center;',
+                style: 'width: 70px;text-align: center;',
                 render:function(row){
                     return undefined === row.icon?"" : '<i class="layui-icon" style="font-size: 30px;">'+row.icon+'</i>';
                 }
@@ -61,25 +70,25 @@
                 name: '排序',
                 headerClass: 'value_col',
                 colClass: 'value_col',
-                style: 'width: 5%;text-align: center;',
+                style: 'width: 70px;text-align: center;',
                 render:function(row){
                     return undefined === row.sort?"" : row.sort;
                 }
             },
             {
-                name: '创建时间',
+                name: '最后修改时间',
                 headerClass: 'value_col',
                 colClass: 'value_col',
-                style: 'width: 10%',
+                style: 'width: 165px',
                 render:function(row){
-                    return undefined === row.createDate?"" : new Date(row.createDate).Format("yyyy-MM-dd hh:mm:ss");
+                    return undefined === row.updateDate?"" : new Date(row.updateDate).Format("yyyy-MM-dd hh:mm:ss");
                 }
             },
             {
                 name: '操作',
                 headerClass: 'value_col',
                 colClass: 'value_col',
-                style: 'width: 30%;text-align: center;',
+                style: 'width: 350px;text-align: center;',
                 render: function(row) {
                     return '<a class="layui-btn layui-btn-normal layui-btn-sm" onclick="addChildMenu(' + row.id + ')"><i class="layui-icon">&#xe654;</i> 添加子菜单</a>' +
                             '<a class="layui-btn layui-btn-normal layui-btn-sm" onclick="editChildMenu(' + row.id + ')"><i class="layui-icon">&#xe642;</i> 编辑菜单</a>' +
@@ -115,7 +124,7 @@
                     content : "${base}/admin/system/menu/add",
                     success : function(layero, addIndex){
                         setTimeout(function(){
-                            layer.tips('点击此处返回角色列表', '.layui-layer-setwin .layui-layer-close', {
+                            layer.tips('点击此处返回菜单列表', '.layui-layer-setwin .layui-layer-close', {
                                 tips: 3
                             });
                         },500);
@@ -143,7 +152,7 @@
             content : "${base}/admin/system/menu/add?parentId="+data,
             success : function(layero, addIndex){
                 setTimeout(function(){
-                    layer.tips('点击此处返回角色列表', '.layui-layer-setwin .layui-layer-close', {
+                    layer.tips('点击此处返回菜单列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
                     });
                 },500);
@@ -163,7 +172,7 @@
             content : "${base}/admin/system/menu/edit?id="+data,
             success : function(layero, index){
                 setTimeout(function(){
-                    layer.tips('点击此处返回会员列表', '.layui-layer-setwin .layui-layer-close', {
+                    layer.tips('点击此处返回菜单列表', '.layui-layer-setwin .layui-layer-close', {
                         tips: 3
                     });
                 },500);
@@ -176,7 +185,7 @@
         layer.full(editIndex);
     };
     var delMenu =function(data){
-        layer.confirm("你确定要删除该菜单么？这将会使得其下的所有子菜单都删除",{btn:['是的,我确定','我再想想']},
+        layer.confirm("你确定要删除该菜单么？",{btn:['确定','取消']},
                 function(){
                     $.post("${base}/admin/system/menu/delete",{"id":data},function (res){
                         if(res.success){

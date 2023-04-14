@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>角色修改--layui后台管理模板</title>
+    <title>修改角色</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -53,7 +53,7 @@
     </div>
     <div class="layui-form-item layui-form-text">
         <div class="layui-input-block" style="width: 80%">
-            <textarea placeholder="一些可有可无的备注罢了.." name="remarks" class="layui-textarea">${role.remarks}</textarea>
+            <textarea placeholder="角色介绍信息.." name="remarks" class="layui-textarea">${role.remarks}</textarea>
         </div>
     </div>
     <div class="layui-form-item">
@@ -81,8 +81,8 @@
     </div>
     <div class="layui-form-item" style="padding-left: 30%;">
         <div class="layui-input-block">
-            <button class="layui-btn" lay-submit="" lay-filter="editRole">我要修改</button>
-            <button class="layui-btn layui-btn-primary">我不改了</button>
+            <button class="layui-btn" lay-submit="" lay-filter="editRole">提交修改</button>
+            <button class="layui-btn layui-btn-primary">重置</button>
         </div>
     </div>
 </form>
@@ -123,7 +123,7 @@
         });
         form.on("submit(editRole)",function(data){
             if(data.field.id == null){
-                layer.msg("用户ID不存在");
+                layer.msg("角色ID不存在");
                 return false;
             }
             var menus = [];

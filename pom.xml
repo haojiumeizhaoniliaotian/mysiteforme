@@ -3,13 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.example</groupId>
-	<artifactId>demo</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<groupId>com.jones</groupId>
+	<artifactId>admin</artifactId>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<name>mysiteforme</name>
-	<description>this project for myself</description>
+	<name>admin</name>
+	<description>this project for my love</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -154,6 +154,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.26</version>
+		</dependency>
+
+		<dependency>
 			<groupId>com.baomidou</groupId>
 			<artifactId>mybatisplus-spring-boot-starter</artifactId>
 			<version>${mybatisplus-spring-boot-starter.version}</version>
@@ -166,7 +172,7 @@
 		</dependency>
 
 		<!--定时任务-->
-		<dependency>
+		<!--<dependency>
 			<groupId>org.quartz-scheduler</groupId>
 			<artifactId>quartz</artifactId>
 			<version>${quartz.version}</version>
@@ -176,7 +182,7 @@
 					<artifactId>c3p0</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency>
+		</dependency>-->
 
 		<!-- Google jar -->
 		<dependency>
@@ -243,50 +249,10 @@
 			<artifactId>hutool-all</artifactId>
 			<version>3.3.0</version>
 		</dependency>
-
-		<!--对分词索引查询解析-->
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-queryparser</artifactId>
-			<version>7.1.0</version>
-		</dependency>
-
-		<!--高亮 -->
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-highlighter</artifactId>
-			<version>7.1.0</version>
-		</dependency>
-
-		<!--smartcn 中文分词器 SmartChineseAnalyzer  smartcn分词器 需要lucene依赖 且和lucene版本同步-->
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-analyzers-smartcn</artifactId>
-			<version>7.1.0</version>
-		</dependency>
-
-		<!--ik-analyzer 中文分词器-->
-		<dependency>
-			<groupId>cn.bestwu</groupId>
-			<artifactId>ik-analyzers</artifactId>
-			<version>5.1.0</version>
-		</dependency>
-
-		<!--MMSeg4j 分词器-->
-		<dependency>
-			<groupId>com.chenlb.mmseg4j</groupId>
-			<artifactId>mmseg4j-solr</artifactId>
-			<version>2.4.0</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.apache.solr</groupId>
-					<artifactId>solr-core</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
 	</dependencies>
 
 	<build>
+		<finalName>admin-1.0.0</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

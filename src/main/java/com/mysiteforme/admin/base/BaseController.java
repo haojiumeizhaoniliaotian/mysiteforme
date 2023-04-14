@@ -42,23 +42,8 @@ public class BaseController {
 	protected LogService logService;
 
 	@Autowired
-	protected BlogArticleService blogArticleService;
-
-	@Autowired
-	protected BlogChannelService blogChannelService;
-
-	@Autowired
-	protected BlogCommentService blogCommentService;
-
-	@Autowired
-	protected BlogTagsService blogTagsService;
-
-	@Autowired
-	protected QuartzTaskService quartzTaskService;
-
-	@Autowired
-	protected QuartzTaskLogService quartzTaskLogService;
-
-	@Autowired
 	protected UploadInfoService uploadInfoService;
+
+	@Autowired
+	protected OrderService orderService;
 }

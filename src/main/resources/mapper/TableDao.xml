@@ -25,7 +25,7 @@
     </select>
 
     <!--查询所有表（不分页）-->
-    <select id="listAll" resultType="com.mysiteforme.admin.entity.VO.TableVO">
+    <select id="listAll" resultType="com.mysiteforme.admin.entity.vo.TableVO">
         select
         TABLE_NAME as "name",
         TABLE_ROWS as "tableRows",
@@ -35,7 +35,7 @@
         from information_schema.TABLES where TABLE_SCHEMA='mysiteforme'
     </select>
     <!--查询所有表（分页）-->
-    <select id="listPage" resultType="com.mysiteforme.admin.entity.VO.TableVO">
+    <select id="listPage" resultType="com.mysiteforme.admin.entity.vo.TableVO">
         select
         TABLE_NAME as "name",
         TABLE_ROWS as "tableRows",
@@ -49,7 +49,7 @@
         ORDER BY CREATE_TIME DESC
     </select>
 
-    <resultMap id="fieldListDetail" type="com.mysiteforme.admin.entity.VO.TableField">
+    <resultMap id="fieldListDetail" type="com.mysiteforme.admin.entity.vo.TableField">
         <result property="name" column="name" />
         <result property="isNullValue" column="isNullValue"/>
         <result property="type" column="type"/>
@@ -93,10 +93,10 @@
         order by ORDINAL_POSITION
     </select>
 
-    <resultMap id="detailTable" type="com.mysiteforme.admin.entity.VO.TableVO">
+    <resultMap id="detailTable" type="com.mysiteforme.admin.entity.vo.TableVO">
         <result column="name" property="name" />
         <result column="comment" property="comment" />
-        <collection property="fieldList" ofType="com.mysiteforme.admin.entity.VO.TableField">
+        <collection property="fieldList" ofType="com.mysiteforme.admin.entity.vo.TableField">
             <result property="name" column="fieldList.name" />
             <result property="isNullValue" column="fieldList.isNullValue"/>
             <result property="type" column="fieldList.type"/>

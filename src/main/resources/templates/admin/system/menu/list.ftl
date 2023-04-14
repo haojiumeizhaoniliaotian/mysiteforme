@@ -47,7 +47,7 @@
                     <a class="layui-btn" data-type="selectUser">查询</a>
                 </div>
                 <div class="layui-inline">
-                    <a class="layui-btn layui-btn-disabled" data-type="addUser" >添加菜单</a>
+                    <a class="layui-btn" data-type="addUser" >添加菜单</a>
                 </div>
             </blockquote>
             <div class="layui-form layui-hide" id="menuformdiv">
@@ -106,12 +106,12 @@
         var active={
             addUser : function(){
                 var addIndex = layer.open({
-                    title : "添加会员",
+                    title : "添加菜单",
                     type : 2,
-                    content : "${base}/admin/system/user/add",
+                    content : "${base}/admin/system/menu/add",
                     success : function(layero, addIndex){
                         setTimeout(function(){
-                            layer.tips('点击此处返回会员列表', '.layui-layer-setwin .layui-layer-close', {
+                            layer.tips('点击此处返回菜单列表', '.layui-layer-setwin .layui-layer-close', {
                                 tips: 3
                             });
                         },500);

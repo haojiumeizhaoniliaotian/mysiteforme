@@ -75,6 +75,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/blog/**","anon");
         filterChainDefinitionMap.put("/login/main","anon");
         filterChainDefinitionMap.put("/genCaptcha","anon");
+        filterChainDefinitionMap.put("/integrate/weidian/**","anon");
         filterChainDefinitionMap.put("/systemLogout","authc");
         filterChainDefinitionMap.put("/**","authc");
         bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
@@ -143,8 +144,8 @@ public class ShiroConfig {
     @Bean
     public SessionManager webSessionManager(){
         DefaultWebSessionManager manager = new DefaultWebSessionManager();
-        //设置session过期时间为1小时(单位：毫秒)，默认为30分钟
-        manager.setGlobalSessionTimeout(60 * 60 * 1000);
+        //设置session过期时间为5小时(单位：毫秒)，默认为30分钟
+        manager.setGlobalSessionTimeout(5 * 60 * 60 * 1000);
         manager.setSessionValidationSchedulerEnabled(true);
         manager.setSessionDAO(redisSessionDAO());
         return manager;
@@ -156,7 +157,7 @@ public class ShiroConfig {
         manager.setHost(jedisHost);
         manager.setPort(jedisPort);
         //这里是用户session的时长 跟上面的setGlobalSessionTimeout 应该保持一直（上面是1个小时 下面是秒做单位的 我们设置成3600）
-        manager.setExpire(60 * 60);
+        manager.setExpire(5 * 60 * 60);
         manager.setPassword(jedisPassword);
         return manager;
     }

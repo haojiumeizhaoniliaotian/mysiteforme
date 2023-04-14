@@ -59,7 +59,7 @@
         <if test="isShow == true">
             and is_show = #{isShow}
         </if>
-        order by sort desc
+        order by sort asc
     </select>
 
 
@@ -100,7 +100,7 @@
         </if>
     </select>
 
-    <resultMap id="showMenuMap" type="com.mysiteforme.admin.entity.VO.ShowMenu">
+    <resultMap id="showMenuMap" type="com.mysiteforme.admin.entity.vo.ShowMenu">
         <result property="id"       column="id" />
         <result property="pid"      column="pid"/>
         <result property="title"    column="title"/>
@@ -136,7 +136,7 @@
             </otherwise>
         </choose>
         and m.is_show = true
-        order by m.sort desc
+        order by m.sort asc
     </select>
 
     <!--<insert id="saveRoleMenus">-->

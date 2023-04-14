@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mysiteforme.admin.dao.OrderDao" >
+    <!-- 这儿定义一个resultMap -->
+    <resultMap type="com.mysiteforme.admin.entity.Order" id="OrderMap">
+        <id property="id" column="id"/>
+        <result property="orderNo" column="order_no"/>
+        <result property="account" column="account"/>
+        <result property="placeOrderTime" column="place_order_time"/>
+        <result property="price" column="price"/>
+        <result property="status" column="status"/>
+        <result property="contextId"  column="context_id"/>
+        <result property="requestContent"  column="request_content"/>
+        <result property="remarks" column="remarks"/>
+        <result property="delFlag" column="del_flag"/>
+        <result property="createId" column="create_by"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateId" column="update_by"/>
+        <result property="updateDate" column="update_date"/>
+    </resultMap>
+
+    <select id="selectOrderByMap" resultMap="OrderMap"  parameterType="java.util.Map">
+        SELECT
+        u.id,
+        u.order_no,
+        u.account,
+        u.place_order_time,
+        u.price,
+        u.status,
+        u.context_id,
+        u.request_content,
+        u.del_flag,
+        u.remarks,
+        u.create_by,
+        u.create_date,
+        u.update_by,
+        u.update_date
+        from
+        biz_order u
+        where
+        1=1
+        <if test="id == 0 or id == null">
+         and u.del_flag = false
+        </if>
+        <if test="orderNo !=null and orderNo !=''">
+            and u.order_no 	= #{orderNo}
+        </if>
+        <if test="id != 0 and id != null">
+            and u.id = #{id}
+        </if>
+    </select>
+</mapper>

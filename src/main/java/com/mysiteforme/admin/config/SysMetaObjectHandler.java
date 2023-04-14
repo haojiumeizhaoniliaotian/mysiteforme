@@ -35,6 +35,8 @@ public class SysMetaObjectHandler extends MetaObjectHandler {
         if (null == createId) {
             if(MySysUser.ShiroUser() != null) {
                 setFieldValByName("createId", MySysUser.id(), metaObject);
+            }else{
+                setFieldValByName("createId", -1L, metaObject);
             }
         }
         if (null == updateDate) {
@@ -43,6 +45,8 @@ public class SysMetaObjectHandler extends MetaObjectHandler {
         if (null == updateId) {
             if(MySysUser.ShiroUser() != null) {
                 setFieldValByName("updateId", MySysUser.id(), metaObject);
+            }else{
+                setFieldValByName("updateId", -1L, metaObject);
             }
         }
     }
@@ -54,7 +58,11 @@ public class SysMetaObjectHandler extends MetaObjectHandler {
         setFieldValByName("updateDate",new Date(), metaObject);
         Object updateId = getFieldValByName("updateId",metaObject);
         if (null == updateId) {
-            setFieldValByName("updateId", MySysUser.id(), metaObject);
+            if(MySysUser.ShiroUser() != null) {
+                setFieldValByName("updateId", MySysUser.id(), metaObject);
+            }else{
+                setFieldValByName("updateId", -1L, metaObject);
+            }
         }
     }
 }

@@ -3,6 +3,8 @@ package com.mysiteforme.admin.base;
 import com.mysiteforme.admin.realm.AuthRealm.ShiroUser;
 import org.apache.shiro.SecurityUtils;
 
+import java.util.Objects;
+
 /**
  * Created by wangl on 2017/11/25.
  * todo:
@@ -16,7 +18,11 @@ public class MySysUser {
     }
 
     public static Long id() {
-        return ShiroUser().getId();
+        ShiroUser user = ShiroUser();
+        if(Objects.isNull(user)){
+            return -1L;
+        }
+        return user.getId();
     }
 
     public static String loginName() {

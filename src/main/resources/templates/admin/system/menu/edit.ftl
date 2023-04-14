@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>用户修改--layui后台管理模板</title>
+    <title>菜单修改--layui后台管理模板</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -86,8 +86,8 @@
     </div>
     <div class="layui-form-item">
         <div class="layui-input-block">
-            <button class="layui-btn" lay-submit="" lay-filter="addUser">我要修改</button>
-            <button class="layui-btn"   class="layui-btn layui-btn-primary">我不改了</button>
+            <button class="layui-btn" lay-submit="" lay-filter="addUser">提交修改</button>
+            <button class="layui-btn" class="layui-btn layui-btn-primary">重置</button>
         </div>
     </div>
 </form>

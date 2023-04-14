@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>系统用户列表--${site.name}</title>
+    <title>系统用户列表</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -80,8 +80,8 @@
                 {field:'email',     title: '邮箱',    width:'16%' },
                 {field:'tel',       title: '电话',    width:'12%'},
                 {field:'locked',    title: '会员状态',width:'12%',templet:'#userStatus'},
-                {field:'createDate',  title: '创建时间',width:'18%',templet:'<div>{{ layui.laytpl.toDateString(d.createDate) }}</div>',unresize: true}, //单元格内容水平居中
-                {fixed: 'right',    width: '15%', align: 'center',toolbar: '#barDemo'}
+                {field:'updateDate',  title: '最后修改时间',width:'15%',templet:'<div>{{ layui.laytpl.toDateString(d.updateDate) }}</div>',unresize: true}, //单元格内容水平居中
+                {fixed: 'right',    width: '10%', align: 'center',toolbar: '#barDemo'}
             ]]
         };
         table.render(t);
@@ -96,7 +96,7 @@
                     content : "${base}/admin/system/user/edit?id="+data.id,
                     success : function(layero, index){
                         setTimeout(function(){
-                            layer.tips('点击此处返回会员列表', '.layui-layer-setwin .layui-layer-close', {
+                            layer.tips('点击此处返回用户列表', '.layui-layer-setwin .layui-layer-close', {
                                 tips: 3
                             });
                         },500);
@@ -130,12 +130,12 @@
         var active={
             addUser : function(){
                 var addIndex = layer.open({
-                    title : "添加会员",
+                    title : "添加用户",
                     type : 2,
                     content : "${base}/admin/system/user/add",
                     success : function(layero, addIndex){
                         setTimeout(function(){
-                            layer.tips('点击此处返回会员列表', '.layui-layer-setwin .layui-layer-close', {
+                            layer.tips('点击此处返回用户列表', '.layui-layer-setwin .layui-layer-close', {
                                 tips: 3
                             });
                         },500);

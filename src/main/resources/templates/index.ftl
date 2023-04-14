@@ -16,7 +16,8 @@
     <meta name="keywords" content="${site.keywords}"/>
     <!-- 网页作者 -->
     <meta name="author" content="${site.author}"/>
-    <link rel="icon" href="${site.logo}">
+<#--    <link rel="icon" href="${site.logo}">-->
+    <link rel="icon" href="${base}/static/favicon.ico">
     <link rel="stylesheet" href="${base}/static/layui/css/layui.css" media="all" />
     <link rel="stylesheet" href="//at.alicdn.com/t/font_tnyc012u2rlwstt9.css" media="all" />
     <link rel="stylesheet" href="${base}/static/css/main.css" media="all" />
@@ -26,7 +27,7 @@
     <!-- 顶部 -->
     <div class="layui-header header">
         <div class="layui-main">
-            <a href="#" class="logo">mysiteforme</a>
+            <a href="#" class="logo">后台管理</a>
             <!-- 显示/隐藏菜单 -->
             <a href="javascript:" class="iconfont hideMenu icon-menu1"></a>
             <#--<!-- 搜索 &ndash;&gt;-->
@@ -42,7 +43,7 @@
                 <#--<i class="layui-icon">&#xe615;</i>-->
             <#--</div>-->
             <!-- 天气信息 -->
-            <div class="weather" pc>
+            <!-- <div class="weather" pc>
                 <div id="tp-weather-widget"></div>
                 <script>(function(T,h,i,n,k,P,a,g,e){g=function(){P=h.createElement(i);a=h.getElementsByTagName(i)[0];P.src=k;P.charset="utf-8";P.async=1;a.parentNode.insertBefore(P,a)};T["ThinkPageWeatherWidgetObject"]=n;T[n]||(T[n]=function(){(T[n].q=T[n].q||[]).push(arguments)});T[n].l=+new Date();if(T.attachEvent){T.attachEvent("onload",g)}else{T.addEventListener("load",g,false)}}(window,document,"script","tpwidget","//widget.seniverse.com/widget/chameleon.js"))</script>
                 <script>tpwidget("init", {
@@ -60,7 +61,7 @@
                     "hash": "039da28f5581f4bcb5c799fb4cdfb673"
                 });
                 tpwidget("show");</script>
-            </div>
+            </div> -->
             <!-- 顶部右侧菜单 -->
             <ul class="layui-nav top_menu">
                 <#--<li class="layui-nav-item showNotice" id="showNotice" pc>-->
@@ -83,7 +84,7 @@
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:" data-url="${base}/admin/system/user/userinfo"><i class="iconfont icon-zhanghu" data-icon="icon-zhanghu"></i><cite>个人资料</cite></a></dd>
                         <dd><a href="javascript:" data-url="${base}/admin/system/user/changePassword"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>修改密码</cite></a></dd>
-                        <dd><a href="javascript:" class="changeSkin"><i class="iconfont icon-huanfu"></i><cite>更换皮肤</cite></a></dd>
+<#--                        <dd><a href="javascript:" class="changeSkin"><i class="iconfont icon-huanfu"></i><cite>更换皮肤</cite></a></dd>-->
                         <dd><a href="${base}/systemLogout" class="signOut"><i class="iconfont icon-loginout"></i><cite>退出</cite></a></dd>
                     </dl>
                 </li>
@@ -123,7 +124,9 @@
     </div>
     <!-- 底部 -->
     <div class="layui-footer footer">
-        <p>Copyright © 2018孤独的旅行家  Design By 马哥 <a href="http://www.miibeian.gov.cn" target="_blank">苏ICP备17063650号 </a></p>
+        <p>Copyright © 2023
+<#--            <a href="#" target="_blank">粤ICP备XXXXXXXX号 </a>-->
+        </p>
     </div>
 </div>
 <script>
