@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="${base}/static/css/login.css?t=${.now?long}" media="all" />
 </head>
 <body>
-<div id="bg-body"></div>
+<div id="bg-body" class="loginBody"></div>
 <div class="login">
     <h1>后台管理系统</h1>
     <form class="layui-form" action="${base}/login/main" method="post">
@@ -51,7 +51,7 @@
         var layer = layui.layer,
                 $ = layui.jquery,
                 form = layui.form;
-
+/**
         $(document).ready(function() {
             var srcBgArray = ["../static/images/login/1.jpg",
                 "../static/images/login/2.jpg",
@@ -62,6 +62,7 @@
                 alt: 'Full screen background image'
             });
         });
+ */
         $("#mycode").on('click',function(){
             var t = Math.random();
             $("#mycode")[0].src="${base}/genCaptcha?t= "+t;

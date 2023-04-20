@@ -19,6 +19,7 @@ import javax.servlet.ServletRequest;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Created by wangl on 2017/11/21.
@@ -38,18 +39,22 @@ public class OrderController extends BaseController{
     @RequiresPermissions("biz:order:list")
     @PostMapping("list")
     @ResponseBody
-    public LayerData<Order> list(@RequestParam(value = "page",defaultValue = "1")Integer page,
-                                @RequestParam(value = "limit",defaultValue = "10")Integer limit,
+    public LayerData<Order> list(@RequestParam(value = "page", defaultValue = "1")Integer page,
+                                 @RequestParam(value = "limit", defaultValue = "10")Integer limit,
+                                 @RequestParam(value = "sortName", defaultValue = "createDate")String sortName,
+                                 @RequestParam(value = "sortType", defaultValue = "desc")String sortType,
                                 ServletRequest request){
         Map map = WebUtils.getParametersStartingWith(request, "s_");
         LayerData<Order> orderLayerData = new LayerData<>();
         EntityWrapper<Order> orderEntityWrapper = new EntityWrapper<>();
+
         if(!map.isEmpty()){
             String keys = (String) map.get("key");
             if(StringUtils.isNotBlank(keys)) {
-                orderEntityWrapper.like("order_no", keys);
+                orderEntityWrapper.like("order_no", keys).or().like("ott_order_no", keys).or().eq("account", keys);
             }
         }
+        orderEntityWrapper.orderBy(sortName, Objects.equals(sortType, "asc"));
         Page<Order> orderPage = orderService.selectPage(new Page<>(page,limit),orderEntityWrapper);
         orderLayerData.setCount(orderPage.getTotal());
         orderLayerData.setData(orderPage.getRecords());

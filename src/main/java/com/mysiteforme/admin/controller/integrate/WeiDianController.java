@@ -5,9 +5,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.mysiteforme.admin.annotation.SysLog;
 import com.mysiteforme.admin.base.BaseController;
 import com.mysiteforme.admin.entity.Order;
+import com.mysiteforme.admin.entity.enums.OrderStatus;
+import com.mysiteforme.admin.entity.vo.ott.OTTSubscribeResponse;
 import com.mysiteforme.admin.entity.vo.request.OrderCreateVO;
 import com.mysiteforme.admin.entity.vo.weidian.WeiDianOrderVO;
 import com.mysiteforme.admin.redis.RedisWeiDianDAO;
+import com.mysiteforme.admin.service.manager.OTTConfig;
 import com.mysiteforme.admin.service.manager.OTTManager;
 import com.mysiteforme.admin.service.manager.WeiDianConfig;
 import com.mysiteforme.admin.util.RestResponse;
@@ -74,21 +77,59 @@ public class WeiDianController extends BaseController{
         orderService.saveOrder(order);
 
         if(order.getId() == null || order.getId() == 0){
-            LOGGER.error("WeiDian.receive.form.save.error: 同步订单信息出错。content：" + content);
+            LOGGER.error("WeiDian.receive.form.save.error: 同步订单信息出错。");
             return WeiDianResponse.success();
         }
-        /**
+        // 爱奇艺产品编码
+        String aProductNo = null;
+        if(StringUtils.isEmpty(order.getProductNo())){
+            return WeiDianResponse.success();
+        }else{
+            aProductNo = OTTManager.mapProductNo(order.getProductNo());
+            if(StringUtils.isEmpty(aProductNo)){
+                LOGGER.error("WeiDian.receive.form.productNo.error: 无法匹配的产品编码。");
+                order.setStatus(OrderStatus.PRODUCT_NOT_EXIST.getCode());
+                orderService.updateOrder(order);
+                return WeiDianResponse.success();
+            }
+            if(!Objects.equals(aProductNo, OTTConfig.TEST_CARD)){
+                order.setStatus(OrderStatus.NOT_TEST_CARD.getCode());
+                String remarks = StringUtils.isEmpty(order.getRemarks()) ? "" : order.getRemarks();
+                order.setRemarks(remarks + "非测试卡，暂时不允许激活。");
 
-        if(StringUtils.isNotEmpty(order.getAccount())){
-            // 拥有激活手机号，则直接推爱奇艺
-            // 推送爱奇艺
-            String result = OTTManager.subscribe(order);
+                orderService.updateOrder(order);
+                return WeiDianResponse.success();
+            }
         }
-         */
 
+        // 拥有激活手机号,并且产品编码
+        if(StringUtils.isEmpty(order.getAccount())){
+            LOGGER.error("WeiDian.receive.form.account.error: 无法匹配的手机号。" );
+            order.setStatus(OrderStatus.ACCOUNT_EMPTY.getCode());
+            orderService.updateOrder(order);
+            return WeiDianResponse.success();
+        }
+        // 推送爱奇艺
+        OTTSubscribeResponse response = OTTManager.subscribe(order, aProductNo);
+        if(Objects.isNull(response)){
+            order.setStatus(OrderStatus.OTHER.getCode());
+            order.setRemarks("推送爱奇艺代码逻辑错误。");
+            orderService.updateOrder(order);
+        }
+        if(!Objects.equals(response.getErr_code(), 200)){
+            LOGGER.error("WeiDian.receive.form.OTT.error: 推送爱奇艺失败。err_msg:" + JSONObject.toJSONString(response));
+            order.setStatus(OrderStatus.ACTIVATE_FAILED.getCode());
+            orderService.updateOrder(order);
+        }else{
+            order.setStatus(OrderStatus.ACTIVATED.getCode());
+            orderService.updateOrder(order);
+        }
 
         return WeiDianResponse.success();
     }
+
+
+
 
     /**
      * 构建订单数据
@@ -102,6 +143,7 @@ public class WeiDianController extends BaseController{
         //
         BigDecimal price = null;
         String account = null;
+        String productNo = null;
         StringBuilder sb = new StringBuilder();
         Order order = new Order();
 
@@ -116,20 +158,33 @@ public class WeiDianController extends BaseController{
         }else {
            // weiDianOrderVO.getCustomInfos() 转换成 Map<String, String>, name 是key， value 是 value
             Map<String, String> customInfos = weiDianOrderVO.getCustomInfos().stream().collect(HashMap::new, (m, v) -> m.put(v.getName(), v.getValue()), HashMap::putAll);
-            if(customInfos.containsKey("充值手机号")){
-                account = customInfos.get("充值手机号");
+            if(customInfos.containsKey("绑定爱奇艺的手机号")){
+                account = customInfos.get("绑定爱奇艺的手机号");
+            }else if(customInfos.containsKey("接收券码手机号")){
+                // 该格式，手机号会强制加上(+86),需要处理
+                account = customInfos.get("接收券码手机号");
+                account = account.substring(account.indexOf(")") + 1);
             }else {
                 sb.append("未获取到激活手机号；");
             }
         }
+        // 获取产品编码
+        if(CollectionUtils.isEmpty(weiDianOrderVO.getItems())){
+            sb.append("订单商品为空；");
+        }else{
+            // 获取第一个商品的编码
+            productNo = weiDianOrderVO.getItems().get(0).getMerchant_code();
+        }
+
         order.setOrderNo(weiDianOrderVO.getOrder_id());
         order.setPlaceOrderTime(weiDianOrderVO.getPay_time());
         order.setPrice(price);
         order.setAccount(account);
+        order.setProductNo(productNo);
         order.setRemarks(sb.toString());
         order.setDelFlag(Boolean.FALSE);
         // 订单状态 1. 草稿、2. 微店已下单、3. 微店已支付、4. 已同步至爱奇艺、5. 爱奇艺已激活、-1.激活失败
-        order.setStatus(3);
+        order.setStatus(OrderStatus.WEIDIAN_PAID.getCode());
         return order;
     }
 
@@ -160,7 +215,7 @@ public class WeiDianController extends BaseController{
             return WeiDianResponse.failure("同步订单信息出错。");
         }
         // 推送爱奇艺
-        String result = OTTManager.subscribe(order);
+        OTTSubscribeResponse response = OTTManager.subscribe(order, OTTConfig.TEST_CARD);
 
         return WeiDianResponse.success();
     }

@@ -17,6 +17,19 @@ public class OTTConfig {
     public static String PARTNER;
 
     /**
+     * 测试卡
+     */
+    public static String TEST_CARD;
+    /**
+     * 正式年卡
+     */
+    public static String FORMAL_YEAR_CARD;
+    /**
+     * 正式月卡
+     */
+    public static String FORMAL_MONTH_CARD;
+
+    /**
      * 爱奇艺提供的公钥
      */
     @Value("${aiqiy.publicKey}")
@@ -27,9 +40,21 @@ public class OTTConfig {
     @Value("${aiqiy.partner}")
     private String partner;
 
+    @Value("${aiqiy.product.test}")
+    private String testCard;
+
+    @Value("${aiqiy.product.yearCard}")
+    private String formalYearCard;
+
+    @Value("${aiqiy.product.monthCard}")
+    private String formalMonthCard;
+
     @PostConstruct
     public void getEnvironment(){
         PUBLIC_KEY = publicKey;
         PARTNER = partner;
+        TEST_CARD = testCard;
+        FORMAL_YEAR_CARD = formalYearCard;
+        FORMAL_MONTH_CARD = formalMonthCard;
     }
 }

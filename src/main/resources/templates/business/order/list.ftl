@@ -19,7 +19,7 @@
     <div class="layui-field-box">
     <form class="layui-form">
         <div class="layui-inline" style="width: 15%">
-            <input type="text" value="" name="s_key" placeholder="可以输入订单号" class="layui-input search_input">
+            <input type="text" value="" name="s_key" placeholder="输入订单号、ott订单号、激活账号" class="layui-input search_input">
         </div>
         <div class="layui-inline">
             <a class="layui-btn" lay-submit="" lay-filter="searchForm">查询</a>
@@ -37,7 +37,7 @@
         <span class="layui-badge layui-bg-blue">{{ d.statusText }}</span>
         {{#  }else if(d.status == 5){ }}
         <span class="layui-badge layui-bg-green">{{ d.statusText }}</span>
-        {{#  }else if(d.status == -1){ }}
+        {{#  }else if(d.status == -1 || d.status == 11 || d.status == 12 || d.status == 13){ }}
         <span class="layui-badge layui-bg-red">{{ d.statusText }}</span>
         {{#  } else { }}
         <span class="layui-badge layui-bg-gray">{{ d.statusText }}</span>
@@ -65,21 +65,25 @@
             page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
                 layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'], //自定义分页布局
                 //,curr: 5 //设定初始在第 5 页
-                groups: 2, //只显示 1 个连续页码
+                groups: 5, //只显示 1 个连续页码
                 first: "首页", //显示首页
                 last: "尾页", //显示尾页
-                limits:[3,10, 20, 30]
+                limits:[5, 10, 20, 30]
             },
+            where: {},
+            initSort: {},
             width: $(parent.window).width()-223,
             cols: [[
                 {type:'checkbox'},
-                {field:'orderNo', title: '订单号'},
-                {field:'account',  title: '激活账号',    width:'13%'},
-                {field:'placeOrderTime',     title: '下单时间',    width:'15%' , templet:'<div>{{ layui.laytpl.toDateString(d.placeOrderTime) }}</div>'},
-                {field:'price',       title: '订单金额（元）',    width:'13%'},
-                {field:'statusText',    title: '订单状态',width:'12%', templet: '#statusText'},
-                {field:'createDate',  title: '接收时间',width:'15%',templet:'<div>{{ layui.laytpl.toDateString(d.createDate) }}</div>',unresize: true}, //单元格内容水平居中
-                {fixed:'right',    width: '10%', align: 'center',toolbar: '#barDemo'}
+                {field:'orderNo', width: '260', title: '订单号', sort: true},
+                {field:'ottOrderNo', title: 'ott订单号' ,    width:'260'},
+                {field:'productNo',    width:'180',  title: '产品编码', sort: true},
+                {field:'account',    width:'130',  title: '激活账号', sort: true},
+                {field:'price',       title: '订单金额（元）',    width:'130'},
+                {field:'statusText',    title: '订单状态',width:'150', templet: '#statusText'},
+                {field:'placeOrderTime',     title: '下单时间', sort: true,    width:'185' , templet:'<div>{{ layui.laytpl.toDateString(d.placeOrderTime) }}</div>'},
+                {field:'createDate',  title: '接收时间',width:'185',templet:'<div>{{ layui.laytpl.toDateString(d.createDate) }}</div>',unresize: true}, //单元格内容水平居中
+                {fixed:'right',    width: '196', align: 'center',toolbar: '#barDemo'}
             ]]
         };
         table.render(t);
@@ -106,6 +110,13 @@
                 });
                 layer.full(editIndex);
             }
+        });
+
+        //监听排序
+        table.on('sort(demo)', function(obj){
+            t.where.sortName = obj.field;
+            t.where.sortType = obj.type;
+            table.reload('test', t);
         });
 
         //功能按钮
@@ -168,9 +179,10 @@
 
         //搜索
         form.on("submit(searchForm)",function(data){
+            t.initSort = {}
+            console.log(t.initSort);
             t.where = data.field;
             table.reload('test', t);
-            return false;
         });
 
     });

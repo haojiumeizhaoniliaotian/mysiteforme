@@ -44,17 +44,23 @@
             </div>
         </div>
         <div class="layui-inline">
-            <label class="layui-form-label">订单状态</label>
+            <label class="layui-form-label">ott订单号</label>
             <div class="layui-input-block">
-                <input type="text" class="layui-input" name="statusText" disabled value="${order.statusText}">
+                <input type="text" class="layui-input" name="ottOrderNo" disabled value="${order.ottOrderNo}">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">激活账号</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input" name="nickName" disabled value="${order.account}">
             </div>
         </div>
     </div>
     <div class="layui-form-item">
         <div class="layui-inline">
-            <label class="layui-form-label">激活账号</label>
+            <label class="layui-form-label">产品编码</label>
             <div class="layui-input-block">
-                <input type="text" class="layui-input" name="nickName" disabled value="${order.account}">
+                <input type="text" class="layui-input" name="productNo" disabled value="${order.productNo}">
             </div>
         </div>
         <div class="layui-inline">
@@ -70,10 +76,24 @@
             </div>
         </div>
     </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">订单状态</label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input" name="statusText" disabled value="${order.statusText}">
+            </div>
+        </div>
+    </div>
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">请求内容</label>
         <div class="layui-input-block">
             <textarea name="requestContent" disabled class="layui-textarea requestContent">${order.requestContent}</textarea>
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">备注</label>
+        <div class="layui-input-block">
+            <textarea name="requestContent" disabled class="layui-textarea remarks">${order.remarks}</textarea>
         </div>
     </div>
 </form>

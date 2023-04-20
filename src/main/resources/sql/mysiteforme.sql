@@ -771,6 +771,7 @@ CREATE TABLE `biz_order` (
      `order_no` varchar(100) NOT NULL COMMENT '订单号',
      `place_order_time` datetime NOT NULL COMMENT '下单时间',
      `account` varchar(100) DEFAULT NULL COMMENT '激活账号',
+     `product_no` varchar(100) DEFAULT NULL COMMENT '产品编码',
      `price` decimal(18,2) DEFAULT NULL COMMENT '订单金额',
      `context_id` varchar(36) DEFAULT NULL COMMENT '上下文id',
      `request_content` longtext DEFAULT NULL COMMENT '请求内容',

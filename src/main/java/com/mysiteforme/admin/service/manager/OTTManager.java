@@ -3,11 +3,13 @@ package com.mysiteforme.admin.service.manager;
 import com.alibaba.fastjson.JSON;
 import com.mysiteforme.admin.controller.integrate.WeiDianController;
 import com.mysiteforme.admin.entity.Order;
+import com.mysiteforme.admin.entity.vo.ott.OTTSubscribeResponse;
 import com.mysiteforme.admin.entity.vo.ott.OrderSubscribeProductVO;
 import com.mysiteforme.admin.entity.vo.ott.OrderSubscribeVO;
 import com.mysiteforme.admin.util.Base64Util;
 import com.mysiteforme.admin.util.HttpClientUtil;
 import com.mysiteforme.admin.util.TimestampUtil;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
@@ -16,10 +18,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.util.ResourceUtils;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.math.BigDecimal;
 import java.security.KeyFactory;
 import java.security.PrivateKey;
@@ -44,11 +45,19 @@ public class OTTManager {
     private static final String HOST = "http://openapi.vip.iqiyi.com";
     private static final String ORDER_SUBSCRIBE_URL = "/ott/subscribe.action";
 
+    private static final Map<String, String> productMap = new HashMap<>();
+
+    static{
+        productMap.put("IQY-TEST-01SXZY", OTTConfig.TEST_CARD);
+        productMap.put("IQY-42Y-01SXZY", OTTConfig.FORMAL_YEAR_CARD);
+      //  productMap.put("IQY-42M-01SXZY", OTTConfig.FORMAL_YEAR_CARD);
+    }
+
     /**
      * 订单同步接口
      * @param order
      */
-    public static String subscribe(Order order){
+    public static OTTSubscribeResponse subscribe(Order order, String productNo){
         OrderSubscribeVO orderSubscribeVO = new OrderSubscribeVO();
 
         orderSubscribeVO.setMobile(order.getAccount());
@@ -62,7 +71,7 @@ public class OTTManager {
 
         OrderSubscribeProductVO productVO = new OrderSubscribeProductVO();
         // YLSXYX07test
-        productVO.setId("YLSXYX07test");
+        productVO.setId(productNo);
         productVO.setQuantity(1);
         productVO.setTotal_fee((price.multiply(BigDecimal.valueOf(100))).intValue());
         orderSubscribeVO.order_products.add(productVO);
@@ -89,14 +98,17 @@ public class OTTManager {
             if(commonRsp.containsKey("data")){
                 result = new String(Base64Util.decode(commonRsp.get("data")),"UTF-8");
             }
+            order.setOttOrderNo(orderSubscribeVO.getOrder_id());
 
         } catch (IOException e) {
             LOGGER.error("订单同步异常{}", e);
+            return null;
         }
-
         LOGGER.info("订单同步返回结果{}", result);
 
-        return result;
+        OTTSubscribeResponse response = JSON.parseObject(result, OTTSubscribeResponse.class);
+
+        return response;
     }
 
 
@@ -129,9 +141,14 @@ public class OTTManager {
     }
 
     private static String getPrivateKey() throws IOException {
-        Resource resource = new ClassPathResource("rsa/pkcs8_rsa_private_key.pem");
-        System.out.println(resource.getFile().getPath());
-        BufferedReader br = new BufferedReader(new FileReader(resource.getFile().getPath()));
+
+        ClassPathResource classPathResource = new ClassPathResource("rsa/pkcs8_rsa_private_key.pem");
+        InputStream inputStream = classPathResource.getInputStream();
+
+      //  File privateKey = ResourceUtils.getFile("classpath:rsa/pkcs8_rsa_private_key.pem");
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+    //    BufferedReader br = new BufferedReader(new FileReader(privateKey));
         /**
          * 这个巨重要，会筛选掉密钥内容中的首行标识字段
          */
@@ -143,6 +160,16 @@ public class OTTManager {
             s = br.readLine();
         }
         return str.toString();
+    }
+
+    /**
+     * 映射产品编码
+     */
+    public static String mapProductNo(String productNo){
+        if(productMap.containsKey(productNo)){
+            return productMap.get(productNo);
+        }
+        return null;
     }
 
     private static String getPublicKey() throws IOException {
@@ -161,4 +188,6 @@ public class OTTManager {
         }
         return str.toString();
     }
+
+
 }

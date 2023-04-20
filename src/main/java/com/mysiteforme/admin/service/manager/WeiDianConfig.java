@@ -16,6 +16,7 @@ public class WeiDianConfig {
     public static String APP_KEY;
     public static String SECRET;
     public static String MESSAGE_TYPE;
+
     /**
      * app_key
      */
@@ -32,6 +33,7 @@ public class WeiDianConfig {
      */
     @Value("${weidian.messageType}")
     private String messageType;
+
 
     @PostConstruct
     public void getEnvironment(){

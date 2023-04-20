@@ -89,6 +89,8 @@ aiqiy:
   partner: TESTXXX     #合作方编码
   product:
     test: YLSXYX07test  #陕西有线_直充测试天卡
+    yearCard: YLSXYX07test  #陕西有线_直充年卡
+    monthCard: YLSXYX07test  #陕西有线_直充月卡
   publicKey: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCqRmUWRDAScCI0ba1554+FiMY6OI1xgNvgaVEuIKYgM9niYaODVbvLIj8hx/By4nj91VcIg5b5lTj3no+yDewiecoBp3rohAgpfGDYwLmzuB8lL74XMr3GJPA8MDxdNncvtcXeYpohwIDAQAB
 
 weidian:

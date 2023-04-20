@@ -26,6 +26,7 @@ public class WeiDianManager {
     private static final String ORDER_SUBSCRIBE_URL = "/token";
 
 
+
     public static String getAccessToken(){
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");

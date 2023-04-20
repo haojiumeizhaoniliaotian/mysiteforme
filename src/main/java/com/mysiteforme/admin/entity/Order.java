@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.mysiteforme.admin.base.DataEntity;
+import com.mysiteforme.admin.entity.enums.OrderStatus;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -30,6 +31,12 @@ public class Order extends DataEntity<Order> {
 	@TableField("order_no")
 	private String orderNo;
 
+	/**
+	 * ott订单编号
+	 */
+	@TableField("ott_order_no")
+	private String ottOrderNo;
+
     /**
      * 下单时间
      */
@@ -44,6 +51,12 @@ public class Order extends DataEntity<Order> {
 	private String account;
 
 	/**
+	 * 产品编码
+	 */
+	@TableField(value = "product_no")
+	private String productNo;
+
+	/**
 	 * 订单金额
 	 */
 	@TableField(value = "price")
@@ -51,6 +64,7 @@ public class Order extends DataEntity<Order> {
 
 	/**
 	 * 订单状态 1. 草稿、2. 微店已下单、3. 微店已支付、4. 已同步至爱奇艺、5. 爱奇艺已激活、-1.激活失败
+	 * 11. 订单重复、 12. 产品信息不存在 13. 激活账号为空
 	 */
 	@TableField(value = "status")
 	private Integer status;
@@ -62,28 +76,7 @@ public class Order extends DataEntity<Order> {
 	private String statusText;
 
 	public String getStatusText() {
-		String text = null;
-		switch (status) {
-			case 1:
-				text = "草稿";
-				break;
-			case 2:
-				text = "微店已下单";
-				break;
-			case 3:
-				text = "微店已支付";
-				break;
-			case 4:
-				text = "已同步至爱奇艺";
-				break;
-			case 5:
-				text = "爱奇艺已激活";
-				break;
-			case -1:
-				text = "激活失败";
-				break;
-		}
-		return text;
+		return OrderStatus.getName(this.status);
 	}
 
     /**

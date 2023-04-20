@@ -5,7 +5,9 @@
     <resultMap type="com.mysiteforme.admin.entity.Order" id="OrderMap">
         <id property="id" column="id"/>
         <result property="orderNo" column="order_no"/>
+        <result property="ottOrderNo" column="ott_order_no"/>
         <result property="account" column="account"/>
+        <result property="productNo" column="product_no"/>
         <result property="placeOrderTime" column="place_order_time"/>
         <result property="price" column="price"/>
         <result property="status" column="status"/>
@@ -23,7 +25,9 @@
         SELECT
         u.id,
         u.order_no,
+        u.ott_order_no,
         u.account,
+        u.product_no,
         u.place_order_time,
         u.price,
         u.status,
