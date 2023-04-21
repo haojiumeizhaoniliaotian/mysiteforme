@@ -50,7 +50,12 @@ public class OTTManager {
     static{
         productMap.put("IQY-TEST-01SXZY", OTTConfig.TEST_CARD);
         productMap.put("IQY-42Y-01SXZY", OTTConfig.FORMAL_YEAR_CARD);
-      //  productMap.put("IQY-42M-01SXZY", OTTConfig.FORMAL_YEAR_CARD);
+        productMap.put("IQY-42M-01SXZY", OTTConfig.FORMAL_MONTH_CARD);
+        productMap.put("IQY-42Y-000000", OTTConfig.TEST_CARD);
+        productMap.put("IQY-42M-000000", OTTConfig.TEST_CARD);
+        productMap.put("IQY-42H-000000", OTTConfig.TEST_CARD);
+        productMap.put("IQY-42Q-000000", OTTConfig.TEST_CARD);
+        productMap.put("IQY-42D-000000", OTTConfig.TEST_CARD);
     }
 
     /**

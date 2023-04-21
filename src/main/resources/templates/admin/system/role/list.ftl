@@ -102,9 +102,9 @@
                 groups: 2, //只显示 1 个连续页码
                 first: "首页", //显示首页
                 last: "尾页", //显示尾页
-                limits:[3,10, 20, 30]
+                limits:[5, 10, 20, 30]
             },
-            width: $(parent.window).width()-223,
+            where: {},
             cols: [[
                 {type:'checkbox'},
                 // {field:'id',          title: 'ID',      width:'3%'},

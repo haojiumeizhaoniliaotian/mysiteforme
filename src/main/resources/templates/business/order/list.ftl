@@ -11,11 +11,11 @@
     <meta name="format-detection" content="telephone=no">
     <link rel = "shortcut icon" href="${site.logo}">
     <link rel="stylesheet" href="${base}/static/layui/css/layui.css" media="all" />
-    <link rel="stylesheet" href="${base}/static/css/user.css" media="all" />
+    <link rel="stylesheet" href="${base}/static/css/order.css" media="all" />
 </head>
 <body class="childrenBody">
 <fieldset class="layui-elem-field">
-    <legend>订单搜索</legend>
+<#--    <legend>订单搜索</legend>-->
     <div class="layui-field-box">
     <form class="layui-form">
         <div class="layui-inline" style="width: 15%">
@@ -30,7 +30,7 @@
     </form>
     </div>
 </fieldset>
-<div class="layui-form users_list">
+<div class="layui-form order_list">
     <table class="layui-table" id="test" lay-filter="demo"></table>
     <script type="text/html" id="statusText">
         {{# if(d.status == 2 || d.status == 3 || d.status == 4){ }}
@@ -57,7 +57,8 @@
                 form = layui.form,
                 table = layui.table,
                 t;                  //表格数据变量
-
+        // console.log("parent.width:" + $(parent.window).width());
+        // console.log("this.width:" + $(window).width());
         t = {
             elem: '#test',
             url:'${base}/biz/order/list',
@@ -72,7 +73,6 @@
             },
             where: {},
             initSort: {},
-            width: $(parent.window).width()-223,
             cols: [[
                 {type:'checkbox'},
                 {field:'orderNo', width: '260', title: '订单号', sort: true},
