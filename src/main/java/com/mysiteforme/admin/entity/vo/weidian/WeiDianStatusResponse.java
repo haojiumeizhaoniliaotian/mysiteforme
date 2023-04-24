@@ -10,11 +10,11 @@ import java.io.Serializable;
  * @date 2023/4/13 17:24
  */
 @Data
-public class AccessTokenStatusResponse implements Serializable {
+public class WeiDianStatusResponse implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public AccessTokenStatusResponse(){
+    public WeiDianStatusResponse(){
     }
 
     private Integer status_code;

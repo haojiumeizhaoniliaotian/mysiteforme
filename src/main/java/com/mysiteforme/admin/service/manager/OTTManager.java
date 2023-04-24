@@ -26,6 +26,7 @@ import java.security.KeyFactory;
 import java.security.PrivateKey;
 import java.security.Signature;
 import java.security.spec.PKCS8EncodedKeySpec;
+import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,15 +48,22 @@ public class OTTManager {
 
     private static final Map<String, String> productMap = new HashMap<>();
 
+    private static final Map<String, String> productToOrderMap = new HashMap<>();
+
+
     static{
         productMap.put("IQY-TEST-01SXZY", OTTConfig.TEST_CARD);
         productMap.put("IQY-42Y-01SXZY", OTTConfig.FORMAL_YEAR_CARD);
         productMap.put("IQY-42M-01SXZY", OTTConfig.FORMAL_MONTH_CARD);
-        productMap.put("IQY-42Y-000000", OTTConfig.TEST_CARD);
-        productMap.put("IQY-42M-000000", OTTConfig.TEST_CARD);
+        productMap.put("IQY-42Y-000000", OTTConfig.FORMAL_YEAR_CARD);
+        productMap.put("IQY-42M-000000", OTTConfig.FORMAL_MONTH_CARD);
         productMap.put("IQY-42H-000000", OTTConfig.TEST_CARD);
         productMap.put("IQY-42Q-000000", OTTConfig.TEST_CARD);
         productMap.put("IQY-42D-000000", OTTConfig.TEST_CARD);
+
+        productToOrderMap.put(OTTConfig.TEST_CARD, "TT");
+        productToOrderMap.put(OTTConfig.FORMAL_YEAR_CARD, "42Y");
+        productToOrderMap.put(OTTConfig.FORMAL_MONTH_CARD, "42M");
     }
 
     /**
@@ -66,7 +74,7 @@ public class OTTManager {
         OrderSubscribeVO orderSubscribeVO = new OrderSubscribeVO();
 
         orderSubscribeVO.setMobile(order.getAccount());
-        orderSubscribeVO.setOrder_id(wrapOrderNo(order.getOrderNo()));
+        orderSubscribeVO.setOrder_id(wrapOrderNo(order.getOrderNo(), productNo));
         BigDecimal price = order.getPrice();
         if(Objects.isNull(price)){
             price = BigDecimal.ONE; // 为0会导致订单失效
@@ -116,13 +124,39 @@ public class OTTManager {
         return response;
     }
 
-
+    /**
+     * 构建订单OTT订单号，用分隔符区分，如 SW_42Y_821175645287756
+     * 第一位序位，用两位表示字符表示，字符一固定为S，表示为赛锐琪；字符二表示不同客户端，A表示微店...
+     * 第二位序位表示产品类型，42Y、42M等，测试表示 TT
+     * 第三位表示客户端推送过来的订单编号
+     * @param orderNo
+     * @return
+     */
     public static String wrapOrderNo(String orderNo){
         // 构建固定长度的订单号
-        String prefix = "sairuq";
-
+        String prefix = "S";
 
         return prefix + "_test_" + orderNo;
+    }
+
+    /**
+     * 构建订单OTT订单号，用分隔符区分，如 SW_42Y_821175645287756
+     * 第一位序位，用两位表示字符表示，字符一固定为S，表示为赛锐琪；字符二表示不同客户端，A表示微店...
+     * 第二位序位表示产品类型，42Y、42M等，测试表示 TT, 未匹配默认为NT
+     * 第三位表示客户端推送过来的订单编号
+     * @param orderNo
+     * @return
+     */
+    public static String wrapOrderNo(String orderNo, String productNo){
+        // 构建固定长度的订单号
+        String prefix = "SA";
+
+        String productType = "NT";
+        if(productToOrderMap.containsKey(productNo)){
+            productType = productToOrderMap.get(productNo);
+        }
+
+        return MessageFormat.format("{0}_{1}_{2}", prefix, productType, orderNo);
     }
 
     public static String sign(String content, String privateKey, String encode){

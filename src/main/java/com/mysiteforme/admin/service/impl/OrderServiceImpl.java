@@ -35,7 +35,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, Order> implements Or
 	/* 这里caching不能添加put 因为添加了总会执行该方法
 	 * @see com.mysiteforme.service.OrderService#findUserByOrderNo(java.lang.String)
 	 */
-	@Cacheable(value = "order", key = "'order_no_'+#name",unless = "#result == null")
+	@Cacheable(value = "order", key = "'order_no_'+#orderNo",unless = "#result == null")
 	@Override
 	public Order findOrderByOrderNo(String orderNo) {
 		// TODO Auto-generated method stub

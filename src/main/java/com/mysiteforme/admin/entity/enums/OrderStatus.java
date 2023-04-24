@@ -19,7 +19,7 @@ public enum OrderStatus {
     ORDER_DUPLICATE(11,"订单重复"),
     PRODUCT_NOT_EXIST(12,"产品信息不存在"),
     ACCOUNT_EMPTY(13,"激活账号为空"),
-
+    ORDER_NOT_EXISTS(14,"订单不存在"),
     NOT_TEST_CARD(98,"非测试卡"),
     OTHER(99,"其他");
 

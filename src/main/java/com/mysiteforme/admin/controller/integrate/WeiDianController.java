@@ -13,6 +13,7 @@ import com.mysiteforme.admin.redis.RedisWeiDianDAO;
 import com.mysiteforme.admin.service.manager.OTTConfig;
 import com.mysiteforme.admin.service.manager.OTTManager;
 import com.mysiteforme.admin.service.manager.WeiDianConfig;
+import com.mysiteforme.admin.service.manager.WeiDianManager;
 import com.mysiteforme.admin.util.RestResponse;
 import com.mysiteforme.admin.util.UUIDUtil;
 import com.mysiteforme.admin.util.WeiDianResponse;
@@ -67,12 +68,27 @@ public class WeiDianController extends BaseController{
         LOGGER.info("微店消息订阅form:"+ content);
         // 序列化 message 参数，获取订单号、支付时间、完成时间、价格（price）、扩展字段
         WeiDianOrderVO weiDianOrderVO = JSON.parseObject(JSON.toJSONString(contentMap.get("message")), WeiDianOrderVO.class);
+/**
+        if(Objects.nonNull(orderService.findOrderByOrderNo(weiDianOrderVO.getOrder_id()))){
+            LOGGER.error("WeiDian.receive.form.orderNo.exists.error: 订单已存在。" + weiDianOrderVO.getOrder_id());
+            return WeiDianResponse.success();
+        }
+ */
 
         String contextId = UUIDUtil.randomUUID();
 
         Order order = wrapOrder(weiDianOrderVO);
         order.setRequestContent(content);
         order.setContextId(contextId);
+/**
+        // 校验微店订单是否存在
+        if(!WeiDianManager.checkWeiDianOrderIsExists(order.getOrderNo(), redisWeiDianDAO.getAccessToken())){
+            order.setStatus(OrderStatus.ORDER_NOT_EXISTS.getCode());
+            orderService.saveOrder(order);
+            LOGGER.error("WeiDian.receive.form.orderNo.notExists.error: 订单不存在。" + order.getOrderNo());
+            return WeiDianResponse.success();
+        }
+ */
 
         orderService.saveOrder(order);
 
@@ -80,6 +96,9 @@ public class WeiDianController extends BaseController{
             LOGGER.error("WeiDian.receive.form.save.error: 同步订单信息出错。");
             return WeiDianResponse.success();
         }
+
+
+
         // 爱奇艺产品编码
         String aProductNo = null;
         if(StringUtils.isEmpty(order.getProductNo())){
@@ -92,14 +111,14 @@ public class WeiDianController extends BaseController{
                 orderService.updateOrder(order);
                 return WeiDianResponse.success();
             }
-            if(!Objects.equals(aProductNo, OTTConfig.TEST_CARD)){
-                order.setStatus(OrderStatus.NOT_TEST_CARD.getCode());
-                String remarks = StringUtils.isEmpty(order.getRemarks()) ? "" : order.getRemarks();
-                order.setRemarks(remarks + "非测试卡，暂时不允许激活。");
-
-                orderService.updateOrder(order);
-                return WeiDianResponse.success();
-            }
+//            if(!Objects.equals(aProductNo, OTTConfig.TEST_CARD)){
+//                order.setStatus(OrderStatus.NOT_TEST_CARD.getCode());
+//                String remarks = StringUtils.isEmpty(order.getRemarks()) ? "" : order.getRemarks();
+//                order.setRemarks(remarks + "非测试卡，暂时不允许激活。");
+//
+//                orderService.updateOrder(order);
+//                return WeiDianResponse.success();
+//            }
         }
 
         // 拥有激活手机号,并且产品编码

@@ -1,7 +1,8 @@
 package com.mysiteforme.admin.service.manager;
 
 import com.alibaba.fastjson.JSON;
-import com.mysiteforme.admin.entity.vo.weidian.AccessTokenResponse;
+import com.alibaba.fastjson.JSONObject;
+import com.mysiteforme.admin.entity.vo.weidian.*;
 import com.mysiteforme.admin.util.HttpClientUtil;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
@@ -25,6 +26,10 @@ public class WeiDianManager {
     private static final String HOST = "https://oauth.open.weidian.com";
     private static final String ORDER_SUBSCRIBE_URL = "/token";
 
+
+    private static final String API_HOST = "https://api.vdian.com";
+    private static final String API_URL = "/api";
+    private static final String ORDER_GET = "vdian.order.get";
 
 
     public static String getAccessToken(){
@@ -53,6 +58,61 @@ public class WeiDianManager {
         return token;
     }
 
+    /**
+     * 校验微店订单是否存在
+     * @param orderNo
+     * @param token
+     * @return
+     */
+    public static Boolean checkWeiDianOrderIsExists(String orderNo, String token){
+        return Objects.nonNull(getOrderDetail(orderNo, token));
+    }
+
+    /**
+     * 获取订单详情
+     * @param orderNo
+     * @param token
+     */
+    public static OrderGetResultResponse getOrderDetail(String orderNo, String token){
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Content-Type", "application/json");
+
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("order_id", orderNo);
+
+        Map<String, String> publicMap = wrapPublicParam(token, ORDER_GET);
+
+        Map<String, String> querys = new HashMap<>();
+        querys.put("param", JSONObject.toJSONString(paramMap));
+        querys.put("public", JSONObject.toJSONString(publicMap));
+        try {
+            String result = null;
+            HttpResponse response = HttpClientUtil.doGet(API_HOST, API_URL, headers, querys);
+            result = EntityUtils.toString(response.getEntity(), "UTF-8");
+            LOGGER.info("获取微店订单详情返回结果：{}", result);
+
+            OrderGetResponse orderGetResponse = JSON.parseObject(result, OrderGetResponse.class);
+
+            if(Objects.nonNull(orderGetResponse) && Objects.nonNull(orderGetResponse.getStatus())
+                    && Objects.equals(orderGetResponse.getStatus().getStatus_code(), 0)){
+                return orderGetResponse.getResult();
+            }
+
+        } catch (Exception e) {
+            LOGGER.error("获取微店订单详情异常：{}", e);
+        }
+        return null;
+    }
+
+
+    private static Map<String, String> wrapPublicParam(String token, String method){
+        Map<String, String> publicMap = new HashMap<>();
+        publicMap.put("method", method);
+        publicMap.put("access_token", token);
+        publicMap.put("version", "1.0");
+        publicMap.put("format", "json");
+        return publicMap;
+    }
 
 
 }

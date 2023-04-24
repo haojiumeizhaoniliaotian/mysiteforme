@@ -20,5 +20,5 @@ public class AccessTokenResponse implements Serializable {
 
         private AccessTokenResultResponse result;
 
-        private AccessTokenStatusResponse status;
+        private WeiDianStatusResponse status;
 }

@@ -37,7 +37,7 @@
         <span class="layui-badge layui-bg-blue">{{ d.statusText }}</span>
         {{#  }else if(d.status == 5){ }}
         <span class="layui-badge layui-bg-green">{{ d.statusText }}</span>
-        {{#  }else if(d.status == -1 || d.status == 11 || d.status == 12 || d.status == 13){ }}
+        {{#  }else if(d.status == -1 || d.status == 11 || d.status == 12 || d.status == 13 || d.status == 14){ }}
         <span class="layui-badge layui-bg-red">{{ d.statusText }}</span>
         {{#  } else { }}
         <span class="layui-badge layui-bg-gray">{{ d.statusText }}</span>
