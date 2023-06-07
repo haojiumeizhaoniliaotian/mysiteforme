@@ -9,9 +9,6 @@ import java.util.List;
  * <p>
  * 字典表 服务类
  * </p>
- *
- * @author wangl
- * @since 2017-11-26
  */
 public interface DictService extends IService<Dict> {
 

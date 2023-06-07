@@ -25,9 +25,6 @@ import java.util.Set;
  * <p>
  *  服务实现类
  * </p>
- *
- * @author wangl
- * @since 2017-10-31
  */
 @Service("orderService")
 public class OrderServiceImpl extends ServiceImpl<OrderDao, Order> implements OrderService {

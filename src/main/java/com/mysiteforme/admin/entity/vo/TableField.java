@@ -5,11 +5,6 @@ import com.mysiteforme.admin.entity.Dict;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * @Author:tnt
- * @Description:${TODO}
- * @Date: Create in 18:00 2017/12/25.
- */
 public class TableField implements Serializable{
     private String name;
     private Integer length;

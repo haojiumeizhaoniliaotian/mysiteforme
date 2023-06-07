@@ -13,8 +13,6 @@ import com.mysiteforme.admin.base.DataEntity;
  * 字典表
  * </p>
  *
- * @author wangl
- * @since 2017-11-26
  */
 @TableName("sys_dict")
 public class Dict extends DataEntity<Dict> {

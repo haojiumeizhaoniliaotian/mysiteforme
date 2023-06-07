@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by wangl on 2017/11/26.
  * todo: 获取字典标签
  */
 @Component

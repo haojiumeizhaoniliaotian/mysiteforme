@@ -13,8 +13,6 @@ import java.util.Set;
  *  服务类
  * </p>
  *
- * @author wangl
- * @since 2017-10-31
  */
 public interface UserService extends IService<User> {
 

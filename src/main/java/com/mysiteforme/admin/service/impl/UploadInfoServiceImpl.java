@@ -14,9 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
  * <p>
  * 文件上传配置 服务实现类
  * </p>
- *
- * @author wangl
- * @since 2018-07-06
  */
 @Service
 public class UploadInfoServiceImpl extends ServiceImpl<UploadInfoDao, UploadInfo> implements UploadInfoService {

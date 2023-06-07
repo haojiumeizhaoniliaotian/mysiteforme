@@ -18,10 +18,6 @@ import javax.servlet.ServletRequest;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by wangl on 2018/1/13.
- * todo:
- */
 @Controller
 @RequestMapping("admin/system/log")
 public class LogController extends BaseController{

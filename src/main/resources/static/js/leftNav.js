@@ -22,7 +22,7 @@ function navBar(strData){
 				}
 			}
 			ulHtml += '<cite>'+data[i].title+'</cite>';
-			ulHtml += '<span class="layui-nav-more"></span>';
+			ulHtml += '<i class="layui-icon layui-icon-down layui-nav-more"></i>';
 			ulHtml += '</a>';
 			ulHtml += '<dl class="layui-nav-child">';
 			for(var j=0;j<data[i].children.length;j++){

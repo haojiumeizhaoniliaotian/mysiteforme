@@ -15,9 +15,6 @@ import java.util.Date;
  * <p>
  * 
  * </p>
- *
- * @author yangqx
- * @since 2023年4月7日
  */
 @Data
 @TableName("biz_order")

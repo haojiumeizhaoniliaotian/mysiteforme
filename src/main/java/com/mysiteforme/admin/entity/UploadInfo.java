@@ -9,9 +9,6 @@ import com.mysiteforme.admin.base.DataEntity;
  * <p>
  * 文件上传配置
  * </p>
- *
- * @author wangl
- * @since 2018-07-06
  */
 @TableName("upload_info")
 public class UploadInfo extends DataEntity<UploadInfo> {

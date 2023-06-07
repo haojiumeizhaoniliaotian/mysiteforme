@@ -19,9 +19,6 @@ import java.util.List;
  * <p>
  * 字典表 服务实现类
  * </p>
- *
- * @author wangl
- * @since 2017-11-26
  */
 @Service
 @Transactional(readOnly = true, rollbackFor = Exception.class)

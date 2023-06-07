@@ -10,9 +10,6 @@ import java.io.Serializable;
  * <p>
  * 
  * </p>
- *
- * @author wangl
- * @since 2017-12-30
  */
 @TableName("sys_site")
 public class Site extends DataEntity<Site> {

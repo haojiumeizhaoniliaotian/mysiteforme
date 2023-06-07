@@ -18,9 +18,6 @@ import java.util.Map;
  * <p>
  * 系统日志 服务实现类
  * </p>
- *
- * @author wangl
- * @since 2018-01-14
  */
 @Service
 @Transactional(rollbackFor = Exception.class)

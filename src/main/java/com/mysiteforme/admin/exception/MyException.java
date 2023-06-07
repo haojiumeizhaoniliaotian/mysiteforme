@@ -1,7 +1,6 @@
 package com.mysiteforme.admin.exception;
 
 /**
- * Created by wangl on 2018/1/24.
  * todo:
  */
 public class MyException extends RuntimeException {

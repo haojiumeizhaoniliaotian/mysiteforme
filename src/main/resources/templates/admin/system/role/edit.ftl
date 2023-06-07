@@ -11,6 +11,9 @@
     <meta name="format-detection" content="telephone=no">
     <link rel="stylesheet" href="${base}/static/layui/css/layui.css" media="all" />
     <style type="text/css">
+        form.layui-form{
+            padding-bottom: 50px;
+        }
         .layui-form-item .layui-inline{ min-width:15%; float:left; margin-right:0 }
         .layui-form-item .role-box {
             position: relative;

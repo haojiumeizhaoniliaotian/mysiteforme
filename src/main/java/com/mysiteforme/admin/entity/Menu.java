@@ -10,9 +10,6 @@ import org.hibernate.validator.constraints.Length;
  * <p>
  * 
  * </p>
- *
- * @author wangl
- * @since 2017-10-31
  */
 @TableName("sys_menu")
 public class Menu extends TreeEntity<Menu> {

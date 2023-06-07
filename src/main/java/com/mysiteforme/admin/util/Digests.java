@@ -1,6 +1,3 @@
-/**
- * Copyright (c) 2005-2012 springside.org.cn
- */
 package com.mysiteforme.admin.util;
 
 import org.apache.commons.lang3.Validate;

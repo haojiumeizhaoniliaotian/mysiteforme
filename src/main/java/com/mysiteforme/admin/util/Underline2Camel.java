@@ -3,7 +3,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by wangl on 2017/12/31.
  * todo:
  */
 public class Underline2Camel {

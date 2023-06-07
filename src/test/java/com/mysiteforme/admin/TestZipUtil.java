@@ -4,7 +4,6 @@ import com.xiaoleilu.hutool.util.ZipUtil;
 import org.junit.Test;
 
 /**
- * Created by wangl on 2018/1/14.
  * todo:
  */
 public class TestZipUtil {

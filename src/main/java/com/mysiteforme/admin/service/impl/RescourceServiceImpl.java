@@ -12,9 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
  * <p>
  * 系统资源 服务实现类
  * </p>
- *
- * @author wangl
- * @since 2018-01-14
  */
 @Service
 @Transactional(readOnly = true, rollbackFor = Exception.class)

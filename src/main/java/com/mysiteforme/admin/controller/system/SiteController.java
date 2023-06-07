@@ -28,8 +28,6 @@ import javax.servlet.http.HttpServletRequest;
  *  前端控制器
  * </p>
  *
- * @author wangl
- * @since 2017-12-30
  */
 @Controller
 @RequestMapping("/admin/system/site")

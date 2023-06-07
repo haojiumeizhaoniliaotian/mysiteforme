@@ -4,10 +4,6 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
-/**
- * Created by tnt on 2017/12/6.
- * ${TODO}
- */
 public class TreeMenu {
     private Long id;
     private  Long pid;

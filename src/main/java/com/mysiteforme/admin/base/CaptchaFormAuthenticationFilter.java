@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Created by wangl on 2017/11/25.
  * todo:
  */
 public class CaptchaFormAuthenticationFilter extends FormAuthenticationFilter {

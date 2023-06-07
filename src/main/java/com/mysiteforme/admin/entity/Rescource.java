@@ -8,9 +8,6 @@ import com.mysiteforme.admin.base.DataEntity;
  * <p>
  * 系统资源
  * </p>
- *
- * @author wangl
- * @since 2018-01-14
  */
 @TableName("sys_rescource")
 public class Rescource extends DataEntity<Rescource> {

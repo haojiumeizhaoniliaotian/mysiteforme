@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="${base}/static/layui/css/layui.css" media="all" />
     <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
     <style type="text/css">
+        form.layui-form{
+            padding-bottom: 50px;
+        }
         .layui-form-item .layui-inline{ min-width:15%; float:left; margin-right:0; }
         .layui-form-item .role-box {
             position: relative;

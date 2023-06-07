@@ -34,10 +34,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by tnt on 2017/12/7.
- * ${TODO}
- */
 @Controller
 @RequestMapping("file")
 public class FileController {

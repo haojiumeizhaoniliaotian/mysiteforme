@@ -16,9 +16,6 @@ import java.util.List;
  * <p>
  *  服务实现类
  * </p>
- *
- * @author wangl
- * @since 2017-12-30
  */
 @Service("siteService")
 @Transactional(readOnly = true, rollbackFor = Exception.class)

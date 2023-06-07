@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by wangl on 2018/1/14.
  * todo: 计算文件的MD5及SHA1值
  */
 public class DigestUtil {

@@ -11,8 +11,6 @@ import java.util.Map;
  * 系统日志 Mapper 接口
  * </p>
  *
- * @author wangl
- * @since 2018-01-14
  */
 public interface LogDao extends BaseMapper<Log> {
 

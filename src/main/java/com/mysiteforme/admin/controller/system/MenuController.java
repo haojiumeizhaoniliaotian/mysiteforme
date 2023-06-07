@@ -19,10 +19,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by wangl on 2017/12/3.
- * todo:
- */
 @Controller
 @RequestMapping("/admin/system/menu")
 public class MenuController extends BaseController{

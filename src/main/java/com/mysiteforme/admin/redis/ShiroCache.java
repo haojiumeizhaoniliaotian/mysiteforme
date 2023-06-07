@@ -1,7 +1,6 @@
 package com.mysiteforme.admin.redis;
 
 /**
- * Created by wangl on 2017/11/25.
  * todo:
  */
 import java.util.ArrayList;

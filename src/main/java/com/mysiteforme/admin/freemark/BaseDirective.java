@@ -3,7 +3,6 @@ package com.mysiteforme.admin.freemark;
 import freemarker.template.*;
 
 /**
- * Created by wangl on 2017/11/26.
  * todo:
  */
 public class BaseDirective {

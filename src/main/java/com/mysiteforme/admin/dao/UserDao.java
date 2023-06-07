@@ -16,8 +16,6 @@ import java.util.Set;
   *  Mapper 接口
  * </p>
  *
- * @author wangl
- * @since 2017-10-31
  */
 public interface UserDao extends BaseMapper<User> {
 	User selectUserByMap(Map<String, Object> map);

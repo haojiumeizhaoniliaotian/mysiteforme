@@ -19,10 +19,6 @@ import org.springframework.web.util.WebUtils;
 import javax.servlet.ServletRequest;
 import java.util.Map;
 
-/**
- * Created by wangl on 2018/1/1.
- * todo:
- */
 @Controller
 @RequestMapping("admin/system/dict")
 public class DictController extends BaseController{

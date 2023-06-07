@@ -27,10 +27,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * Created by wangl on 2017/11/21.
- *
- */
 @Controller
 @RequestMapping("admin/system/user")
 public class UserController extends BaseController{

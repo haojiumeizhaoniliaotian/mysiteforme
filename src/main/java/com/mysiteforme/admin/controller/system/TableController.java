@@ -26,11 +26,6 @@ import java.io.*;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @Author:tnt
- * @Description:${TODO}
- * @Date: Create in 17:51 2017/12/25.
- */
 @Controller
 @RequestMapping("admin/system/table")
 public class TableController extends BaseController{

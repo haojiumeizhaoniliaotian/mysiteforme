@@ -31,7 +31,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by wangl on 2017/11/21.
  * todo:springMVC配置文件
  */
 @Configuration

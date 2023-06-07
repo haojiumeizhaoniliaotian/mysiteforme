@@ -9,9 +9,6 @@ import com.mysiteforme.admin.base.DataEntity;
  * <p>
  * 系统日志
  * </p>
- *
- * @author wangl
- * @since 2018-01-13
  */
 @TableName("sys_log")
 public class Log extends DataEntity<Log> {

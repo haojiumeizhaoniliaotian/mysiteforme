@@ -15,8 +15,6 @@ import java.util.Set;
   *  Mapper 接口
  * </p>
  *
- * @author yangqx
- * @since 2023年4月7日
  */
 public interface OrderDao extends BaseMapper<Order> {
 	Order selectOrderByMap(Map<String, Object> map);
